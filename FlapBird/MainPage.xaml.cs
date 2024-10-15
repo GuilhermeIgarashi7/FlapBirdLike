@@ -34,6 +34,7 @@ public partial class MainPage : ContentPage
 	{
 		dead = false;
 		Mario.TranslationY = 0;
+		Drawn();
 	}
 
 	async Task Drawn()
@@ -73,6 +74,29 @@ public partial class MainPage : ContentPage
 			Drawn();
 		}
 
+		protected override void OnSizeAllocated(double AJ, double LJ)
+		{
+			base.OnSizeAllocated(AJ, LJ);
+			LarguraJanela = LJ;
+			AlturaJanela = AJ;	//isso que faz os canos andarem
+		}
+
+		bool VerificaColisaoTeto()
+		{
+			var minY = -AlturaJanela/2;
+			if (Mario.TranslationY <=minY)
+			    return true;
+			else
+				return false;
+		}
+		bool VerificaColisaoChao()
+		{
+			var maxY = AlturaJanela/2;
+			if (Mario.TranslationY >=maxY)
+			return true;
+			else
+			return false;
+		}
 
 }
 
