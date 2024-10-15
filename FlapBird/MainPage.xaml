@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FlapBird.MainPage">
+             x:Class="FlapBird.MainPage"
+             Shell.NavBarIsVisible="False">
 
 
 
@@ -42,14 +43,6 @@
                      HorizontalOptions="End"
                      />
 
-               <Image
-                     x:Name="Chao"
-                     Source="chao.png"
-                     HeightRequest="200"
-                     WidthRequest="900"
-                     VerticalOptions="EndAndExpand"
-                     HorizontalOptions="FillAndExpand"
-                     />              
               <Frame
               x:Name="FrameGameOver"
               Background="#99000000"
