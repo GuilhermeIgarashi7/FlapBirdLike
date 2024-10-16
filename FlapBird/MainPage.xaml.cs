@@ -2,24 +2,30 @@
 
 public partial class MainPage : ContentPage
 {
-
-	const int gravidade = 10;
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	const int gravidade = 1;
 
 	const int maxPulo = 3;
 
+	const int minOpen = 50;
+
+	const int JumpStrengt = 20;
+
+	const int fps = 20;
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	int speed = 6;
 	int tempoPulando = 0;
 
 	bool isJumping = false;	
 
-	const int fps = 300;
-
 	bool dead = true;
 	
-	double LarguraJanela;
+	double LarguraJanela=0;
 
-	double AlturaJanela;
-
-	int speed = 80;
+	double AlturaJanela=0;
 
 
 
@@ -28,42 +34,13 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	void Inicializar()
 	{
 		dead = false;
 		Mario.TranslationY = 0;
 		Drawn();
-	}
-
-	async Task Drawn()
-	{
-		while (!dead)
-		{
-			CreateGravity();
-			AndarPipe();
-			await Task.Delay(fps);
-
-		}
-	}
-
-	async void CreateGravity()
-	{
-		Mario.TranslationY += gravidade;
-	}
-
-	void AndarPipe()
-	{
-		CanoCima.TranslationX -= speed;
-		CanoBaixo.TranslationX -= speed;
-
-		if (CanoCima.TranslationX < -LarguraJanela)
-		{
-			CanoCima.TranslationX = 0;
-			CanoBaixo.TranslationX = 0;
-		}
-
 	}
 
 		void OnGameOverClicked(object s, TappedEventArgs a)
@@ -74,12 +51,67 @@ public partial class MainPage : ContentPage
 			Drawn();
 		}
 
+	async Task Drawn()
+	{
+		while (!dead)
+		{
+			if(isJumping)
+			{
+				JumpApply();
+			}
+			else
+			{
+				CreateGravity();
+				AndarPipe();
+			}
+
+			CreateGravity();
+			AndarPipe();
+			if(VerifyColisao())
+			{
+				dead = true;
+				FrameGameOver.IsVisible = true;
+				break;
+			}
+			await Task.Delay(fps);
+
+		}
+	}
+
+	async void CreateGravity()
+	{
+		Mario.TranslationY += gravidade;
+	}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	void AndarPipe()
+	{
+		CanoCima.TranslationX -= speed;
+		CanoBaixo.TranslationX -= speed;
+
+		if (CanoCima.TranslationX < -LarguraJanela)
+		{
+			CanoCima.TranslationX = 0;
+			CanoBaixo.TranslationX = 0;
+			var MaxHeight = -100;
+			var MinHeight = -CanoBaixo.HeightRequest;
+			
+
+			CanoCima.TranslationY = Random.Shared.Next((int)MaxHeight, (int)MinHeight);
+			CanoBaixo.TranslationY = CanoCima.TranslationY + minOpen + CanoBaixo.HeightRequest;
+		}
+
+	}
+
+
 		protected override void OnSizeAllocated(double AJ, double LJ)
 		{
 			base.OnSizeAllocated(AJ, LJ);
 			LarguraJanela = LJ;
 			AlturaJanela = AJ;	//isso que faz os canos andarem
 		}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 		bool VerificaColisaoTeto()
 		{
@@ -96,6 +128,33 @@ public partial class MainPage : ContentPage
 			return true;
 			else
 			return false;
+		}
+
+		bool VerifyColisao()
+		{
+			if (!dead)
+			{
+				if (VerificaColisaoTeto() || VerificaColisaoChao())
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		void JumpApply()
+		{
+			Mario.TranslationY -= JumpStrengt;
+			tempoPulando ++;
+			if (tempoPulando > maxPulo)
+			{
+				isJumping = false;
+				tempoPulando = 0;
+			}
+		}
+		void Jump(object sender, TappedEventArgs a)
+		{
+			isJumping = true;
 		}
 
 }
