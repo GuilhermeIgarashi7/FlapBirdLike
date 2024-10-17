@@ -8,6 +8,19 @@
 
         <Grid>
 
+             <Label x:Name="LabelFinalScore"
+                     FontFamily="GameFont"
+                     FontSize="200"
+                     IsVisible ="False"
+                     VerticalOptions="Start"
+                     HorizontalOptions="Center"
+                     TextColor="Black"/>
+
+              <Label x:Name="LabelScore"
+                     FontFamily="GameFont"
+                     FontSize="50"
+                     TextColor="Black"
+                     Margin="0,40,0,0"/>
 
               <Image
                      x:Name="FundoImg"
@@ -43,11 +56,18 @@
                      HorizontalOptions="End"
                      />
 
+
+
+              
+
               <Frame
               x:Name="FrameGameOver"
               Background="#99000000"
               VerticalOptions="FillAndExpand"
               HorizontalOptions="FillAndExpand">
+
+
+
               <Frame.GestureRecognizers>
                      <TapGestureRecognizer Tapped="OnGameOverClicked"/>
               </Frame.GestureRecognizers>
@@ -60,8 +80,6 @@
               VerticalOptions="CenterAndExpand"
               HorizontalOptions="CenterAndExpand"
               Aspect="Fill"/>
-
-
 
 
 
