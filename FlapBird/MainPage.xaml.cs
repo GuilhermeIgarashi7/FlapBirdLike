@@ -11,12 +11,12 @@ public partial class MainPage : ContentPage
 
 	const int JumpStrengt = 20;
 
-	const int fps = 20;
+	const int fps = 24;
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	int speed = 6;
+	int speed = 4;
 	int tempoPulando = 0;
 
 	int score = 0;
@@ -40,6 +40,8 @@ public partial class MainPage : ContentPage
 
 	void Inicializar()
 	{
+
+		LabelFinalScore.IsVisible = false;
 		dead = false;
 		Mario.TranslationY = 0;
 		Drawn();
@@ -47,7 +49,8 @@ public partial class MainPage : ContentPage
 
 		void OnGameOverClicked(object s, TappedEventArgs a)
 
-		{
+		{	
+
 			FrameGameOver.IsVisible=false;
 			Inicializar();
 			Drawn();
@@ -77,7 +80,10 @@ public partial class MainPage : ContentPage
 				LabelFinalScore.IsVisible = true;
 				break;
 			}
+
 			await Task.Delay(fps);
+
+
 
 		}
 	}
@@ -107,10 +113,10 @@ public partial class MainPage : ContentPage
 
 			score++;
 			LabelScore.Text = "Canos: " + score.ToString("D3");
-			LabelScore.TextColor = Color.FromHex("#000000");
+
 
 			LabelFinalScore.Text = "Final Score:" + score.ToString("D3");
-			LabelFinalScore.TextColor = Color.FromHex("#000000");
+
 
 		}
 

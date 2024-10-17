@@ -13,13 +13,11 @@
                      FontSize="200"
                      IsVisible ="False"
                      VerticalOptions="Start"
-                     HorizontalOptions="Center"
-                     TextColor="Black"/>
+                     HorizontalOptions="Center"/>
 
               <Label x:Name="LabelScore"
                      FontFamily="GameFont"
                      FontSize="50"
-                     TextColor="Black"
                      Margin="0,40,0,0"/>
 
               <Image
