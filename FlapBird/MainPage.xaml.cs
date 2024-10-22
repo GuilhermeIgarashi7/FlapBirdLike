@@ -43,7 +43,7 @@ public partial class MainPage : ContentPage
 
 		LabelFinalScore.IsVisible = false;
 		dead = false;
-		Mario.TranslationY = 0;
+		FenixImage.TranslationY = 0;
 		Drawn();
 	}
 
@@ -61,6 +61,8 @@ public partial class MainPage : ContentPage
 	{
 		while (!dead)
 		{
+			CreateGravity();
+			AndarPipe();
 			if(isJumping)
 			{
 				JumpApply();
@@ -90,7 +92,7 @@ public partial class MainPage : ContentPage
 
 	async void CreateGravity()
 	{
-		Mario.TranslationY += gravidade;
+		FenixImage.TranslationY += gravidade;
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void AndarPipe()
@@ -136,7 +138,7 @@ public partial class MainPage : ContentPage
 		bool VerificaColisaoTeto()
 		{
 			var minY = -AlturaJanela/2;
-			if (Mario.TranslationY <=minY)
+			if (FenixImage.TranslationY <=minY)
 			    return true;
 			else
 				return false;
@@ -144,7 +146,7 @@ public partial class MainPage : ContentPage
 		bool VerificaColisaoChao()
 		{
 			var maxY = AlturaJanela/2;
-			if (Mario.TranslationY >=maxY)
+			if (FenixImage.TranslationY >=maxY)
 			return true;
 			else
 			return false;
@@ -154,17 +156,37 @@ public partial class MainPage : ContentPage
 		{
 			if (!dead)
 			{
-				if (VerificaColisaoTeto() || VerificaColisaoChao())
+				if (VerificaColisaoTeto() || VerificaColisaoChao()|| VerificaCanoCima())
 				{
 					return true;
 				}
 			}
 			return false;
 		}
+
+
+		bool VerificaCanoCima()
+		{
+			var HorizontalCord = (LarguraJanela/2)-(FenixImage.WidthRequest/2);
+			var VerticalCord = (AlturaJanela/2)-(FenixImage.HeightRequest/2)+FenixImage.TranslationY;
+
+			if (HorizontalCord >= Math.Abs(CanoCima.TranslationX)-CanoCima.WidthRequest &&
+				HorizontalCord <= Math.Abs(CanoCima.TranslationX)+CanoCima.WidthRequest &&
+				VerticalCord   <= CanoCima.HeightRequest + CanoCima.TranslationY)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+
+
+		}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		void JumpApply()
 		{
-			Mario.TranslationY -= JumpStrengt;
+			FenixImage.TranslationY -= JumpStrengt;
 			tempoPulando ++;
 			if (tempoPulando > maxPulo)
 			{

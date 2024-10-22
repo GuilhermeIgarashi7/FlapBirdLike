@@ -30,18 +30,20 @@
                     />
               
               <Image
-                     x:Name="Mario"
-                     Source="mario_2d.png"
-                     Margin="30,0,0,0"
+                     x:Name="FenixImage"
+                     Source="fenix.png"
                      WidthRequest="60"
-                     HeightRequest="90"
+                     HeightRequest="60"
                      VerticalOptions="Center"
-                     HorizontalOptions="Start"/>
+                     HorizontalOptions="Center"
+                     BackgroundColor="red"/>
        
               <Image
                      x:Name="CanoCima"
                      Source="cano_de_cima.png"
+                     BackgroundColor="red"
                      WidthRequest="60"
+                     HeightRequest="200"
                      VerticalOptions="Start"
                      HorizontalOptions="End"
                      />
@@ -50,8 +52,10 @@
                      x:Name="CanoBaixo"
                      Source="cano_de_baixo.png"
                      WidthRequest="60"
+                     HeightRequest="200"
                      VerticalOptions="End"
                      HorizontalOptions="End"
+                     BackgroundColor="red"
                      />
 
 
