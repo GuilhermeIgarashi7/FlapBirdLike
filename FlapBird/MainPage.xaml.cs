@@ -130,6 +130,13 @@ public partial class MainPage : ContentPage
 			base.OnSizeAllocated(AJ, LJ);
 			LarguraJanela = LJ;
 			AlturaJanela = AJ;	//isso que faz os canos andarem
+
+			if(AJ > 0)
+			{
+				CanoCima.HeightRequest = AJ - FenixImage.HeightRequest;
+				CanoBaixo.HeightRequest = AJ - FenixImage.HeightRequest;
+
+			}
 		}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
