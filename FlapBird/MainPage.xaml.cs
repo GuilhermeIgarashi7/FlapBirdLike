@@ -3,20 +3,20 @@
 public partial class MainPage : ContentPage
 {
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	const int gravidade = 1;
+	const int gravidade = 20;
 
 	const int maxPulo = 3;
 
-	const int minOpen = 50;
+	const int minOpen = 200;
 
-	const int JumpStrengt = 20;
+	const int JumpStrengt = 40;
 
-	const int fps = 24;
+	const int fps = 50;
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	int speed = 4;
+	int speed = 10;
 	int tempoPulando = 0;
 
 	int score = 0;
@@ -37,14 +37,30 @@ public partial class MainPage : ContentPage
 	}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		protected override void OnSizeAllocated(double AJ, double LJ)
+		{
+			base.OnSizeAllocated(AJ, LJ);
+			LarguraJanela = LJ;
+			AlturaJanela = AJ;	//isso que faz os canos andarem
+
+			if(AJ > 0)
+			{
+				CanoCima.HeightRequest = AJ - FenixImage.HeightRequest;
+				CanoBaixo.HeightRequest = AJ - FenixImage.HeightRequest;
+
+			}
+		}
 
 	void Inicializar()
 	{
-
+		FrameGameOver.IsVisible = false;
 		LabelFinalScore.IsVisible = false;
-		dead = false;
+		CanoBaixo.TranslationX = -LarguraJanela;
+		CanoCima.TranslationY = -LarguraJanela;
+		FenixImage.TranslationX = 0;
 		FenixImage.TranslationY = 0;
-		Drawn();
+		
+		AndarPipe();
 	}
 
 		void OnGameOverClicked(object s, TappedEventArgs a)
@@ -52,6 +68,7 @@ public partial class MainPage : ContentPage
 		{	
 
 			FrameGameOver.IsVisible=false;
+			dead = false;
 			Inicializar();
 			Drawn();
 			score = 0;
@@ -62,15 +79,11 @@ public partial class MainPage : ContentPage
 		while (!dead)
 		{
 			if(isJumping)
-			{
-				JumpApply();
-			}
+			JumpApply();
+			
 			else
-			{
-				CreateGravity();
-
-			}
-				AndarPipe();
+			CreateGravity();
+			AndarPipe();
 
 			if(VerifyColisao())
 			{
@@ -123,31 +136,13 @@ public partial class MainPage : ContentPage
 	}
 
 
-		protected override void OnSizeAllocated(double AJ, double LJ)
-		{
-			base.OnSizeAllocated(AJ, LJ);
-			LarguraJanela = LJ;
-			AlturaJanela = AJ;	//isso que faz os canos andarem
-
-			if(AJ > 0)
-			{
-				CanoCima.HeightRequest = AJ - FenixImage.HeightRequest;
-				CanoBaixo.HeightRequest = AJ - FenixImage.HeightRequest;
-
-			}
-		}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		bool VerifyColisao()
 		{
-			if (!dead)
-			{
-				if (VerificaColisaoTeto() || VerificaColisaoChao()|| VerificaCanoCima())
-				{
-					return true;
-				}
-			}
-			return false;
+
+		return (!dead && (VerificaColisaoTeto() || VerificaColisaoChao()|| VerificaCanoCima()));
+
 		}
 
 
