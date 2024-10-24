@@ -61,8 +61,6 @@ public partial class MainPage : ContentPage
 	{
 		while (!dead)
 		{
-			CreateGravity();
-			AndarPipe();
 			if(isJumping)
 			{
 				JumpApply();
@@ -70,11 +68,10 @@ public partial class MainPage : ContentPage
 			else
 			{
 				CreateGravity();
-				AndarPipe();
-			}
 
-			CreateGravity();
-			AndarPipe();
+			}
+				AndarPipe();
+
 			if(VerifyColisao())
 			{
 				dead = true;
@@ -104,8 +101,9 @@ public partial class MainPage : ContentPage
 		{
 			CanoCima.TranslationX = 0;
 			CanoBaixo.TranslationX = 0;
-			var MaxHeight = -100;
-			var MinHeight = -CanoBaixo.HeightRequest;
+
+			var MaxHeight = -(CanoBaixo.HeightRequest * 0.1);
+			var MinHeight = -(CanoBaixo.HeightRequest * 0.8);
 			
 
 			CanoCima.TranslationY = Random.Shared.Next((int)MaxHeight, (int)MinHeight);
@@ -140,6 +138,17 @@ public partial class MainPage : ContentPage
 		}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+		bool VerifyColisao()
+		{
+			if (!dead)
+			{
+				if (VerificaColisaoTeto() || VerificaColisaoChao()|| VerificaCanoCima())
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 
 
 		bool VerificaColisaoTeto()
@@ -156,18 +165,6 @@ public partial class MainPage : ContentPage
 			if (FenixImage.TranslationY >=maxY)
 			return true;
 			else
-			return false;
-		}
-
-		bool VerifyColisao()
-		{
-			if (!dead)
-			{
-				if (VerificaColisaoTeto() || VerificaColisaoChao()|| VerificaCanoCima())
-				{
-					return true;
-				}
-			}
 			return false;
 		}
 

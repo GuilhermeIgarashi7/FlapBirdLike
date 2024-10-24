@@ -43,7 +43,7 @@
                      Source="cano_de_cima.png"
                      BackgroundColor="red"
                      WidthRequest="60"
-                     HeightRequest="200"
+                     HeightRequest="620"
                      VerticalOptions="Start"
                      HorizontalOptions="End"
                      />
@@ -52,7 +52,7 @@
                      x:Name="CanoBaixo"
                      Source="cano_de_baixo.png"
                      WidthRequest="60"
-                     HeightRequest="200"
+                     HeightRequest="620"
                      VerticalOptions="End"
                      HorizontalOptions="End"
                      BackgroundColor="red"
