@@ -30,8 +30,8 @@
                     />
               
               <Image
-                     x:Name="FenixImage"
-                     Source="fenix.png"
+                     x:Name="CachorroImage"
+                     Source="cachorro.png"
                      WidthRequest="60"
                      HeightRequest="60"
                      VerticalOptions="Center"

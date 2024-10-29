@@ -34,6 +34,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
+
 	}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,8 +46,8 @@ public partial class MainPage : ContentPage
 
 			if(AJ > 0)
 			{
-				CanoCima.HeightRequest = AJ - FenixImage.HeightRequest;
-				CanoBaixo.HeightRequest = AJ - FenixImage.HeightRequest;
+				CanoCima.HeightRequest = AJ - CachorroImage.HeightRequest;
+				CanoBaixo.HeightRequest = AJ - CachorroImage.HeightRequest;
 
 			}
 		}
@@ -57,22 +58,12 @@ public partial class MainPage : ContentPage
 		LabelFinalScore.IsVisible = false;
 		CanoBaixo.TranslationX = -LarguraJanela;
 		CanoCima.TranslationY = -LarguraJanela;
-		FenixImage.TranslationX = 0;
-		FenixImage.TranslationY = 0;
+		CachorroImage.TranslationX = 0;
+		CachorroImage.TranslationY = 0;
+		score = 0;
 		
 		AndarPipe();
 	}
-
-		void OnGameOverClicked(object s, TappedEventArgs a)
-
-		{	
-
-			FrameGameOver.IsVisible=false;
-			dead = false;
-			Inicializar();
-			Drawn();
-			score = 0;
-		}
 
 	async Task Drawn()
 	{
@@ -102,7 +93,7 @@ public partial class MainPage : ContentPage
 
 	async void CreateGravity()
 	{
-		FenixImage.TranslationY += gravidade;
+		CachorroImage.TranslationY += gravidade;
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void AndarPipe()
@@ -149,7 +140,7 @@ public partial class MainPage : ContentPage
 		bool VerificaColisaoTeto()
 		{
 			var minY = -AlturaJanela/2;
-			if (FenixImage.TranslationY <=minY)
+			if (CachorroImage.TranslationY <=minY)
 			    return true;
 			else
 				return false;
@@ -157,7 +148,7 @@ public partial class MainPage : ContentPage
 		bool VerificaColisaoChao()
 		{
 			var maxY = AlturaJanela/2;
-			if (FenixImage.TranslationY >=maxY)
+			if (CachorroImage.TranslationY >=maxY)
 			return true;
 			else
 			return false;
@@ -166,8 +157,8 @@ public partial class MainPage : ContentPage
 
 		bool VerificaCanoCima()
 		{
-			var HorizontalCord = (LarguraJanela/2)-(FenixImage.WidthRequest/2);
-			var VerticalCord = (AlturaJanela/2)-(FenixImage.HeightRequest/2)+FenixImage.TranslationY;
+			var HorizontalCord = (LarguraJanela/2)-(CachorroImage.WidthRequest/2);
+			var VerticalCord = (AlturaJanela/2)-(CachorroImage.HeightRequest/2)+CachorroImage.TranslationY;
 
 			if (HorizontalCord >= Math.Abs(CanoCima.TranslationX)-CanoCima.WidthRequest &&
 				HorizontalCord <= Math.Abs(CanoCima.TranslationX)+CanoCima.WidthRequest &&
@@ -185,7 +176,7 @@ public partial class MainPage : ContentPage
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		void JumpApply()
 		{
-			FenixImage.TranslationY -= JumpStrengt;
+			CachorroImage.TranslationY -= JumpStrengt;
 			tempoPulando ++;
 			if (tempoPulando > maxPulo)
 			{
@@ -196,6 +187,18 @@ public partial class MainPage : ContentPage
 		void Jump(object sender, TappedEventArgs a)
 		{
 			isJumping = true;
+		}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		void OnGameOverClicked(object s, TappedEventArgs a)
+
+		{	
+
+			FrameGameOver.IsVisible=false;
+			dead = false;
+			Inicializar();
+			Drawn();
+
 		}
 
 }
