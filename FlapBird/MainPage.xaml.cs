@@ -3,14 +3,14 @@
 public partial class MainPage : ContentPage
 {
     // Constantes
-    const int gravidade = 20;
+    const int gravidade = 5;
     const int maxPulo = 3;
-    const int minOpen = 300;
-    const int JumpStrengt = 40;
-    const int fps = 50;
+    const int minOpen = 200;
+    const int JumpStrengt = 30;
+    const int fps = 25;
 
     // Variáveis
-    int speed = 10;
+    int speed = 5;
     int tempoPulando = 0;
     int score = 0;
     bool isJumping = false;
@@ -97,8 +97,7 @@ public partial class MainPage : ContentPage
 
         if (CanoBaixo.TranslationX < -LarguraJanela)
         {
-            CanoBaixo.TranslationX = 0;
-            CanoCima.TranslationX = 0;
+            CanoCima.TranslationX = 20;
 
             var MaxHeight = -(CanoBaixo.HeightRequest * 0.1);
             var MinHeight = -(CanoBaixo.HeightRequest * 0.8);

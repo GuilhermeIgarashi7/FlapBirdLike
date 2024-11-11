@@ -32,8 +32,8 @@
               <Image
                      x:Name="CachorroImage"
                      Source="cachorro.png"
-                     WidthRequest="60"
-                     HeightRequest="60"
+                     WidthRequest="50"
+                     HeightRequest="50"
                      VerticalOptions="Center"
                      HorizontalOptions="Center"
                      BackgroundColor="red"/>
@@ -42,7 +42,7 @@
                      x:Name="CanoCima"
                      Source="cano_de_cima.png"
                      BackgroundColor="red"
-                     WidthRequest="60"
+                     WidthRequest="30"
                      HeightRequest="620"
                      VerticalOptions="Start"
                      HorizontalOptions="End"
@@ -51,7 +51,7 @@
               <Image
                      x:Name="CanoBaixo"
                      Source="cano_de_baixo.png"
-                     WidthRequest="60"
+                     WidthRequest="30"
                      HeightRequest="620"
                      VerticalOptions="End"
                      HorizontalOptions="End"
