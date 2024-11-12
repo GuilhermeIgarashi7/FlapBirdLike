@@ -98,12 +98,13 @@ public partial class MainPage : ContentPage
         if (CanoBaixo.TranslationX < -LarguraJanela)
         {
             CanoCima.TranslationX = 20;
+            CanoBaixo.TranslationX = 20;
 
             var MaxHeight = -(CanoBaixo.HeightRequest * 0.1);
             var MinHeight = -(CanoBaixo.HeightRequest * 0.8);
 
             CanoCima.TranslationY = Random.Shared.Next((int)MinHeight, (int)MaxHeight);
-            CanoBaixo.TranslationY = CanoCima.TranslationY + minOpen + CanoBaixo.HeightRequest;
+            CanoBaixo.TranslationY = CanoCima.TranslationY + CanoBaixo.HeightRequest + minOpen;
 
             score++;
             LabelScore.Text = "Score: " + score.ToString("D5");
@@ -122,13 +123,21 @@ public partial class MainPage : ContentPage
     bool VerificaColisaoTeto()
     {
         var minY = -AlturaJanela / 2;
-        return CachorroImage.TranslationY <= minY;
+        if (CachorroImage.TranslationY <= minY)
+        return true;
+        else
+        return false;
     }
 
     bool VerificaColisaoChao()
     {
         var maxY = AlturaJanela / 2;
-        return CachorroImage.TranslationY >= maxY - CachorroImage.Height;
+        if(CachorroImage.TranslationY >= maxY)
+        return true;
+        else
+        return false;
+
+
     }
 
     bool VerificaCanoCima()
@@ -161,6 +170,6 @@ public partial class MainPage : ContentPage
         FrameGameOver.IsVisible = false;
         dead = false;
         Inicializar();
-        _ = Drawn();
+        Drawn();
     }
 }

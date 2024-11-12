@@ -28,38 +28,37 @@
                      VerticalOptions="FillAndExpand"
                      HorizontalOptions="FillAndExpand"
                     />
+
+                    
               
               <Image
                      x:Name="CachorroImage"
                      Source="cachorro.png"
+                     Aspect="AspectFit"
                      WidthRequest="50"
                      HeightRequest="50"
                      VerticalOptions="Center"
                      HorizontalOptions="Center"
                      BackgroundColor="red"/>
        
-              <Image
+
+              <Image Source="cano_de_cima.jpg"
                      x:Name="CanoCima"
-                     Source="cano_de_cima.png"
-                     BackgroundColor="red"
-                     WidthRequest="30"
-                     HeightRequest="620"
+                     Aspect="Fill"
                      VerticalOptions="Start"
                      HorizontalOptions="End"
-                     />
-
-              <Image
-                     x:Name="CanoBaixo"
-                     Source="cano_de_baixo.png"
-                     WidthRequest="30"
                      HeightRequest="620"
+                     WidthRequest="30"
+                     BackgroundColor="red"/>
+
+            <Image Source="cano_de_baixo.jpg"
+                     x:Name="CanoBaixo"
+                     Aspect="Fill"
                      VerticalOptions="End"
                      HorizontalOptions="End"
-                     BackgroundColor="red"
-                     />
-
-
-
+                     HeightRequest="620"
+                     WidthRequest="30"
+                     BackgroundColor="red"/>
               
 
               <Frame
