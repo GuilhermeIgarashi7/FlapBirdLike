@@ -117,8 +117,17 @@ public partial class MainPage : ContentPage
 
     bool VerifyColisao()
     {
-        return (!dead && (VerificaColisaoChao() || VerificaColisaoTeto() || VerificaCanoCima() || VerificaCanoBaixo()));
+        return (!dead && (VerificaColisaoChao() || VerificaColisaoTeto() || VerificaColisaoCano()));
     }
+
+	bool VerificaColisaoCano()
+	{
+		if(VerificaCanoCima() || VerificaCanoBaixo())
+			return true;
+		else 
+			return false;
+	}
+
 
     bool VerificaColisaoTeto()
     {
@@ -142,22 +151,37 @@ public partial class MainPage : ContentPage
 
     bool VerificaCanoCima()
     {
-        var HorizontalCord = (LarguraJanela / 2) - (CachorroImage.WidthRequest / 2);
-        var VerticalCord = (AlturaJanela / 2) - (CachorroImage.HeightRequest / 2) + CachorroImage.TranslationY;
+        
 
-        return (HorizontalCord >= Math.Abs(CanoCima.TranslationX) - CanoCima.WidthRequest &&
-                HorizontalCord <= Math.Abs(CanoCima.TranslationX) + CanoCima.WidthRequest &&
-                VerticalCord <= CanoCima.HeightRequest + CanoCima.TranslationY);
+		var HorizontalCord= LarguraJanela - 50 - (CachorroImage.WidthRequest / 2);
+		var VerticalCord = (AlturaJanela / 2) - (CachorroImage.HeightRequest / 2) + CachorroImage.TranslationY;
+
+		if (HorizontalCord >= Math.Abs(CanoCima.TranslationX) - CanoCima.WidthRequest &&
+		HorizontalCord <= Math.Abs(CanoCima.TranslationX) + CanoCima.WidthRequest &&
+		VerticalCord <= CanoCima.HeightRequest + CanoCima.TranslationY)
+        	return true;
+		else
+			return false;
+
     }
 
     bool VerificaCanoBaixo()
     {
-        var HorizontalCord = (LarguraJanela / 2) - (CachorroImage.WidthRequest / 2);
-        var VerticalCord = (AlturaJanela / 2) + (CachorroImage.HeightRequest / 2) + CachorroImage.TranslationY;
 
-        return (HorizontalCord >= Math.Abs(CanoCima.TranslationX) - CanoCima.WidthRequest &&
-                HorizontalCord <= Math.Abs(CanoCima.TranslationX) + CanoCima.WidthRequest &&
-                VerticalCord >= CanoCima.TranslationY + minOpen);
+
+		var PosicaoH = LarguraJanela - 50 - CachorroImage.WidthRequest / 2;
+		var PosicaoV = (AlturaJanela / 2) + (CachorroImage.HeightRequest / 2) + CachorroImage.TranslationY;
+		var yMaxCano = CanoCima.HeightRequest + CanoCima.TranslationY + minOpen;
+		if (PosicaoH >= Math.Abs(CanoCima.TranslationX) - CanoCima.WidthRequest &&
+		 	PosicaoH <= Math.Abs(CanoCima.TranslationX) + CanoCima.WidthRequest &&
+		 	PosicaoH >= yMaxCano)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
     }
 
     void Jump(object sender, TappedEventArgs args)

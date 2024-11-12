@@ -42,7 +42,7 @@
                      BackgroundColor="red"/>
        
 
-              <Image Source="cano_de_cima.jpg"
+              <Image Source="cano_de_cima.png"
                      x:Name="CanoCima"
                      Aspect="Fill"
                      VerticalOptions="Start"
@@ -51,7 +51,7 @@
                      WidthRequest="30"
                      BackgroundColor="red"/>
 
-            <Image Source="cano_de_baixo.jpg"
+            <Image Source="cano_de_baixo.png"
                      x:Name="CanoBaixo"
                      Aspect="Fill"
                      VerticalOptions="End"
